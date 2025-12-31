@@ -22,30 +22,20 @@ I will end up with:
 
 Search one at a time, skim, don’t binge.
 
-Core concepts
-
+Core concepts:
 event driven architecture explained
-
 discrete event simulation python
-
 simulation engine architecture
-
 event loop architecture explained
-
 priority queue event simulation
 
-Systems thinking
-
+Systems thinking:
 backend system design event processing
-
 how event queues work
-
 deterministic simulation systems
 
-Python-specific (optional)
-
+Python-specific (optional):
 python heapq priority queue
-
 python dataclasses for architecture
 
-You are learning patterns, not copying code.
+learn patterns, don't copy code.
