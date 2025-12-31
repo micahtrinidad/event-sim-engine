@@ -17,3 +17,35 @@ I will end up with:
 - state (holds current system state like price, positions, counters, etc.)
 - strategy (defines how system reacts to events)
 - simulator (the engine that pulls events -> updates states -> invokes strategy)
+
+🔍 YouTube search terms (use these literally)
+
+Search one at a time, skim, don’t binge.
+
+Core concepts
+
+event driven architecture explained
+
+discrete event simulation python
+
+simulation engine architecture
+
+event loop architecture explained
+
+priority queue event simulation
+
+Systems thinking
+
+backend system design event processing
+
+how event queues work
+
+deterministic simulation systems
+
+Python-specific (optional)
+
+python heapq priority queue
+
+python dataclasses for architecture
+
+You are learning patterns, not copying code.
