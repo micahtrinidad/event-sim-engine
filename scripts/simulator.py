@@ -1,5 +1,6 @@
 from events import Event
 from state import State
+from queue import EventQueue
 
 event_list = [
     Event(timestamp=1.0, type="PRICE_UPDATE", price=100.0),
@@ -9,19 +10,22 @@ event_list = [
 
 def run(event_list: list) -> State:
     new_state = State()
-    sorted_events = sorted(event_list, key=lambda e: e.timestamp)
+    #sorted_events = sorted(event_list, key=lambda e: e.timestamp)
+    queue = EventQueue()
 
-    for event in sorted_events:
-        # Advance through the sim
+    # Populate the queue with events from event list
+    for event in event_list:
+        queue.push(event)
+
+    # Pop the events in the order that the priority queue put them in
+    while not queue.is_empty():
+        event = queue.pop()
+
         new_state.current_time = event.timestamp
         if event.type == "PRICE_UPDATE":
             new_state.price = event.price
-    
-    print(
-        f"time={new_state.current_time:.1f}, "
-        f"event={event.type}, "
-        f"price={new_state.price}"
-    )
+
+            print(f"time={new_state.current_time:.1f}, event={event.type}, price={new_state.price}")
     
     return new_state
 
