@@ -22,6 +22,7 @@ def run(event_list: list, strategy=None) -> State:
         new_state.current_time = event.timestamp
         if event.type == "PRICE_UPDATE":
             new_state.price = event.price
+            new_state.price_history.append(event.price)
 
         # If there is a strategy, do something
         if strategy is not None:
@@ -43,4 +44,4 @@ if __name__ == "__main__":
 
     strategy = HeartBeatStrategy(interval=1.0, end_time=5.0)
     final_state = run(event_list, strategy=strategy)
-    print("Final state:", final_state.current_time, final_state.price)
+    print("Final state:", final_state.current_time, final_state.price, final_state.price_history)
