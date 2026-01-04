@@ -1,14 +1,12 @@
 from events import Event
 from state import State
 from queue import EventQueue
+from actions import ScheduleEventAction
+from strategy import HeartBeatStrategy
 
-event_list = [
-    Event(timestamp=1.0, type="PRICE_UPDATE", price=100.0),
-    Event(timestamp=1.5, type="PRICE_UPDATE", price=99.5),
-    Event(timestamp=2.5, type="PRICE_UPDATE", price=104.0)
-]
 
-def run(event_list: list) -> State:
+
+def run(event_list: list, strategy=None) -> State:
     new_state = State()
     #sorted_events = sorted(event_list, key=lambda e: e.timestamp)
     queue = EventQueue()
@@ -25,10 +23,24 @@ def run(event_list: list) -> State:
         if event.type == "PRICE_UPDATE":
             new_state.price = event.price
 
-            print(f"time={new_state.current_time:.1f}, event={event.type}, price={new_state.price}")
+        # If there is a strategy, do something
+        if strategy is not None:
+            actions = strategy.on_event(event, new_state)
+
+            for action in actions:
+                if isinstance(action, ScheduleEventAction):
+                    queue.push(action.event)
+                    print(f"  scheduled {action.event.type} at {action.event.timestamp}")
     
     return new_state
 
 if __name__ == "__main__":
-    final_state = run(event_list)
+    event_list = [
+    Event(timestamp=1.0, type="TICK"),
+    Event(timestamp=1.0, type="PRICE_UPDATE", price=100.0),
+    Event(timestamp=2.0, type="PRICE_UPDATE", price=99.5)
+    ]
+
+    strategy = HeartBeatStrategy(interval=1.0, end_time=5.0)
+    final_state = run(event_list, strategy=strategy)
     print("Final state:", final_state.current_time, final_state.price)
