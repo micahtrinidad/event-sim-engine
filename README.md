@@ -18,9 +18,7 @@ I will end up with:
 - strategy (defines how system reacts to events)
 - simulator (the engine that pulls events -> updates states -> invokes strategy)
 
-🔍 YouTube search terms (use these literally)
-
-Search one at a time, skim, don’t binge.
+YouTube search terms 
 
 Core concepts:
 event driven architecture explained
